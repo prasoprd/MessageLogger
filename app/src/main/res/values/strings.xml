@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Message Logger</string>
+    <string name="tab_text_1">Deleted</string>
+    <string name="tab_text_2">Edited</string>
+</resources>
