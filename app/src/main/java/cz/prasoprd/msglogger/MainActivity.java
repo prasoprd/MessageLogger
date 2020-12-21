@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,20 +18,19 @@ import org.javacord.api.AccountType;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
-import cz.prasoprd.msglogger.ui.main.PreferenceClass;
 import cz.prasoprd.msglogger.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     public static MainActivity clazz;
-    PreferenceClass token;
+    MySharedPreferences token;
     DiscordApi api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        token = new PreferenceClass(MainActivity.this);
+        token = new MySharedPreferences(MainActivity.this);
         if (!token.getText().isEmpty()) {
             api = new DiscordApiBuilder().setAccountType(AccountType.CLIENT).setToken(token.getText()).login().join();
         }
@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (api != null) {
+                    Snackbar.make(v,"Already logged in as " + api.getYourself().getDiscriminatedName(), Snackbar.LENGTH_LONG).show();
+                }
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setTitle("Enter your Discord token:");
                 EditText editText = new EditText(MainActivity.this);

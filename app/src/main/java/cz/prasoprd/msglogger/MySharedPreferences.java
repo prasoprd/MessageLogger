@@ -1,14 +1,14 @@
-package cz.prasoprd.msglogger.ui.main;
+package cz.prasoprd.msglogger;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class PreferenceClass {
+public class MySharedPreferences {
 
     public static final String PREFERENCE_NAME = "cz.prasoprd.msglogger";
     private final SharedPreferences sharedpreferences;
 
-    public PreferenceClass(Context context) {
+    public MySharedPreferences(Context context) {
         sharedpreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
